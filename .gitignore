@@ -1,0 +1,15 @@
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### DOCKER ###
+*.vhdx
+
+### temp ###
+data
+logs
+log
+store
+*.rar

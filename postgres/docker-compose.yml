@@ -1,0 +1,23 @@
+version: "3.1"
+services:
+  db:   
+    image: postgres   
+    volumes:     
+      - ./data:/postgresData
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      POSTGRES_PASSWORD: Fever!@#456
+      POSTGRES_USER: kong
+      POSTGRES_DB: kong
+      PGDATA: /postgresData
+    ports:
+      - 5432:5432
+    networks:
+      - testnet
+networks:
+  testnet:      
+  
+volumes:
+  data:
