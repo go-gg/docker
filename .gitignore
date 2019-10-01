@@ -8,8 +8,4 @@
 *.vhdx
 
 ### temp ###
-data
-logs
-log
-store
 *.rar
