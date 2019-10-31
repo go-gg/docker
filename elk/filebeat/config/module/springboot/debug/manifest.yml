@@ -1,0 +1,18 @@
+module_version: 1.0
+
+var:
+  - name: paths
+    default:
+      - /app/log/*/*/*.log
+    os.darwin:
+      - /usr/local/var/spring.log*
+    os.windows:
+      - E:\development\java\spring-projects\bwton-marketing\logs\marketing-admin\*\*.log*
+
+  - name: dd
+    default: "yigedidi"
+
+ingest_pipeline: ingest/default.json
+input: config/debug.yml
+
+
