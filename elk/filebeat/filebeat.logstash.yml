@@ -1,0 +1,13 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /app/logs/*.log
+
+output.logstash:
+  hosts: ["logstash:5044"]
+
+setup.kibana:
+  host: "elasticsearch:5601"
+  username: "elastic"
+  password: "sxnywu1b6nxzetul"

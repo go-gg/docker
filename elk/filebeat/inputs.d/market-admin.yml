@@ -1,0 +1,6 @@
+- type: log
+  paths:
+    - /app/logs/marketing-admin/*/*.log*
+  fields:
+    app_name: "marketing-admin"
+  pipeline: "springboot-pipeline"

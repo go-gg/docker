@@ -1,18 +1,23 @@
-filebeat.inputs:
-- type: log
+#filebeat.config.modules:
+#  path: ${path.config}/modules.d/*.yml
+filebeat.config.inputs:
   enabled: true
-  paths:
-    - /app/logs/*.log
-
-output.logstash:
-  hosts: ["logstash:5044"]
+  path: inputs.d/*.yml
+  reload.enabled: true
+  reload.period: 10s
 
 setup.kibana:
-  host: "elasticsearch:5601"
+  host: "kibana:5601"
   username: "elastic"
   password: "sxnywu1b6nxzetul"
 
-#output.elasticsearch:
-#  hosts: ["elasticsearch:9200"]
-#  username: "elastic"
-#  password: "sxnywu1b6nxzetul"
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  username: "elastic"
+  password: "sxnywu1b6nxzetul"
+  #  pipeline: "test-pipeline"
+  index: "springboot-%{[fields.app_name]}-%{+yyyy.MM.dd}"
+
+setup.ilm.enabled: false
+setup.template.name: "springboot"
+setup.template.pattern: "springboot-*"
