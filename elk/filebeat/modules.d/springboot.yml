@@ -1,4 +1,4 @@
 - module: springboot
   debug:
     enabled: true
-    #var.paths: ["/root/log.txt"]
+    #var.paths:

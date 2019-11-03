@@ -1,0 +1,112 @@
+{
+  "description": "Pipeline for parsing springboot debug logs",
+  "processors": [
+    {
+      "gsub": {
+        "field": "log.file.path",
+        "pattern": ".*[\\\\/]logs[\\\\/]",
+        "target_field": "log.file.base",
+        "replacement": ""
+      }
+    },
+    {
+      "split": {
+        "field": "log.file.base",
+        "separator": "[\\\\/]",
+        "target_field": "log.file.bases"
+      }
+    },
+    {
+      "script": {
+        "lang": "painless",
+        "source": "ctx.log.app_name = ctx.log.file.bases[0];"
+      }
+    },
+    {
+      "script": {
+        "lang": "painless",
+        "source": "ctx.log.log_name = ctx.log.file.bases[1];"
+      }
+    },
+    {
+      "grok": {
+        "field": "message",
+        "patterns": [
+          "%{DATA:log.date} %{DATA:log.time}%{SPACE}%{LOGLEVEL:log.level} %{NUMBER:log.pid} --- \\[%{DATA:log.thread_name}\\] %{DATA:log.class_name}%{SPACE}: %{GREEDYMULTILINE:log.message}",
+          "%{GREEDYDATA:log.message}"
+        ],
+        "ignore_missing": true,
+        "pattern_definitions": {
+          "GREEDYMULTILINE": "(.|\n)*"
+        }
+      }
+    },
+    {
+      "set": {
+        "field": "log.timestamp",
+        "value": "{{log.date}}-{{log.time}}"
+      }
+    },
+    {
+      "date": {
+        "field": "log.timestamp",
+        "target_field": "@timestamp",
+        "formats": ["yyyy-MM-dd HH:mm:ss.SSS"],
+        "timezone": "Asia/Shanghai",
+        "ignore_failure": true
+      }
+    },
+    {
+      "json" : {
+        "field" : "log.message",
+        "target_field" : "log.data",
+        "ignore_failure" : true
+      }
+    },
+    {
+      "remove": {
+        "if": "ctx.log.data != null",
+        "field": "log.message"
+      }
+    },
+    {
+      "set": {
+        "field": "_index",
+        "value": "{{log.app_name}}-{{log.log_name}}-{{log.date}}"
+      }
+    },
+    {
+      "remove": {
+        "field": "log.timestamp"
+      }
+    },
+    {
+      "remove": {
+        "field": "log.file.base"
+      }
+    },
+    {
+      "remove": {
+        "field": "log.file.bases"
+      }
+    },
+    {
+      "remove": {
+        "field": "log.file.path"
+      }
+    },
+    {
+      "remove": {
+        "field": "message"
+      }
+    }
+  ],
+  "on_failure": [
+    {
+      "set": {
+        "field": "error.message",
+        "value": "{{ _ingest.on_failure_message }}"
+      }
+    }
+  ]
+}

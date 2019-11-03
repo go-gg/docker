@@ -36,7 +36,9 @@ services:
   filebaet:
     image: docker.elastic.co/beats/filebeat:7.3.2
     volumes:
-      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./filebeat/config/module/springboot:/usr/share/filebeat/module/springboot
+      - ./filebeat/config/modules.d/springboot.yml:/usr/share/filebeat/modules.d/springboot.yml
       - ./filebeat/logs:/app/logs
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro
