@@ -39,7 +39,7 @@ services:
       - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - ./filebeat/module/springboot:/usr/share/filebeat/module/springboot
       - ./filebeat/modules.d/springboot.yml:/usr/share/filebeat/modules.d/springboot.yml
-      - ./filebeat/logs:/app/logs
+      - E:\development\java\spring-projects\bwton-marketing\logs:/app/logs
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro
     networks:
