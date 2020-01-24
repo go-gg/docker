@@ -1,0 +1,11 @@
+version: '3.6'
+services:
+  consul-1:
+    image: consul
+    volumes:
+      - ../etc/localtime:/etc/localtime:ro
+      - ../etc/timezone:/etc/timezone:ro
+    ports:
+      - 8500:8500
+    command:
+      consul agent -dev

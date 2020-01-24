@@ -1,0 +1,17 @@
+version: '3.6'
+services:
+  kafka_manager:
+    image: hlebalbau/kafka-manager:stable
+    volumes:
+      - ../etc/localtime:/etc/localtime:ro
+      - ../etc/timezone:/etc/timezone:ro
+    ports:
+      - 9000:9000
+    environment:
+      ZK_HOSTS: "192.168.1.101:2181"
+      APPLICATION_SECRET: "random-secret"
+      KAFKA_MANAGER_AUTH_ENABLED: "true"
+      KAFKA_MANAGER_USERNAME: "admin"
+      KAFKA_MANAGER_PASSWORD: "Ecjf!@#456"
+    command:
+      -Dpidfile.path=/dev/null
