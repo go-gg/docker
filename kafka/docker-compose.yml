@@ -15,3 +15,8 @@ services:
       KAFKA_MANAGER_PASSWORD: "Ecjf!@#456"
     command:
       -Dpidfile.path=/dev/null
+    networks:
+      - mynet
+
+networks:
+  mynet:
