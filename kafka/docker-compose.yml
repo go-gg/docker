@@ -2,6 +2,9 @@ version: '3.6'
 services:
   kafka_manager:
     image: hlebalbau/kafka-manager:stable
+    deploy:
+      restart_policy:
+        condition: on-failure
     volumes:
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro

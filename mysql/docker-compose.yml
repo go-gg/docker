@@ -2,6 +2,9 @@ version: "3.1"
 services:
   db:   
     image: mysql
+    deploy:
+      restart_policy:
+        condition: on-failure
     volumes:
       - ./my.cnf:/etc/mysql/my.cnf
       - ./data:/mysqlData
@@ -9,9 +12,6 @@ services:
       - ../etc/timezone:/etc/timezone:ro
     command: 
       --default-authentication-plugin=mysql_native_password
-    deploy:
-      restart_policy:
-        condition: on-failure
     environment:
       MYSQL_ROOT_PASSWORD: mYL5VRClXYGCX4Hf
     ports:

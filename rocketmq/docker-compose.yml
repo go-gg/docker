@@ -3,6 +3,9 @@ version: '3.5'
 services:
   rmqnamesrv:
     image: foxiswho/rocketmq:server-4.5.2
+    deploy:
+      restart_policy:
+        condition: on-failure
     container_name: rmqnamesrv
     ports:
       - 9876:9876
@@ -12,12 +15,15 @@ services:
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro
     environment:
-      JAVA_OPT_EXT: "-Duser.home=/opt -Xms128m -Xmx128m -Xmn128m"
+      JAVA_OPT_EXT: "-Duser.home=/opt -Xms256m -Xmx256m -Xmn256m"
     networks:
       - mynet
 
   rmqbroker:
     image: foxiswho/rocketmq:broker-4.5.2
+    deploy:
+      restart_policy:
+        condition: on-failure
     container_name: rmqbroker
     ports:
       - 10909:10909
@@ -29,7 +35,7 @@ services:
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro
     environment:
-      JAVA_OPT_EXT: "-Duser.home=/opt -server -Xms128m -Xmx128m -Xmn128m"
+      JAVA_OPT_EXT: "-Duser.home=/opt -server -Xms256m -Xmx256m -Xmn256m"
     command: ["/bin/bash","mqbroker","-c","/etc/rocketmq/broker.conf","-n","rmqnamesrv:9876","autoCreateTopicEnable=true"]
     depends_on:
       - rmqnamesrv
@@ -38,6 +44,9 @@ services:
 
   rmqconsole:
     image: styletang/rocketmq-console-ng
+    deploy:
+      restart_policy:
+        condition: on-failure
     container_name: rmqconsole
     ports:
       - 8180:8080

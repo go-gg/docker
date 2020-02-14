@@ -1,15 +1,16 @@
 version: '3.6'
 services:
-  consul-1:
+  consul:
     image: consul
+    deploy:
+      restart_policy:
+        condition: on-failure
     volumes:
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro
     command:
-      consul agent -server -bootstrap -ui -client 0.0.0.0 -advertise 192.168.1.101 -data-dir /tmp/consul -datacenter dc01 -node web01
-    deploy:
-      restart_policy:
-        condition: on-failure
+      consul agent -dev -ui -client 0.0.0.0
+    #      consul agent -server -bootstrap -ui -client 0.0.0.0 -bind '{{ GetInterfaceIP "eth0" }}' -data-dir /tmp/consul -datacenter dc01 -node web01
     ports:
       - 8300:8300
       - 8500:8500

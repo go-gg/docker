@@ -2,39 +2,42 @@ version: '3.3'
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
-    ports:
-      - "9200:9200"
-      - "9300:9300"
+    deploy:
+      restart_policy:
+        condition: on-failure
     volumes:
       - ./elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./elasticsearch/data:/usr/share/elasticsearch/data
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro
+    ports:
+      - "9200:9200"
+      - "9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       ELASTIC_PASSWORD: sxnywu1b6nxzetul
     networks:
       - mynet
-    deploy:
-      mode: replicated
-      replicas: 1
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.4.2
-    ports:
-      - "5601:5601"
+    deploy:
+      restart_policy:
+        condition: on-failure
     volumes:
       - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro
+    ports:
+      - "5601:5601"
     networks:
       - mynet
-    deploy:
-      mode: replicated
-      replicas: 1
 
   filebaet:
     image: docker.elastic.co/beats/filebeat:7.4.2
+    deploy:
+      restart_policy:
+        condition: on-failure
     volumes:
       - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - ./filebeat/module/springboot:/usr/share/filebeat/module/springboot
@@ -44,28 +47,6 @@ services:
       - ../etc/timezone:/etc/timezone:ro
     networks:
       - mynet
-    deploy:
-      mode: replicated
-      replicas: 1
-
-#  logstash:
-#    image: docker.elastic.co/logstash/logstash:7.4.2
-#    ports:
-#      - "5000:5000"
-#      - "5044:5044"
-#      - "9600:9600"
-#    volumes:
-#      - ./logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
-#      - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
-#      - ../etc/localtime:/etc/localtime:ro
-#      - ../etc/timezone:/etc/timezone:ro
-#    environment:
-#      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-#    networks:
-#      - mynet
-#    deploy:
-#      mode: replicated
-#      replicas: 1
 
 networks:
   mynet:
