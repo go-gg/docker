@@ -1,0 +1,21 @@
+version: '3.6'
+services:
+  mqtt:
+    image: eclipse-mosquitto
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - ./config:/mosquitto/config
+      - ./data:/mosquitto/data
+      - ./log:/mosquitto/log
+      - ../etc/localtime:/etc/localtime:ro
+      - ../etc/timezone:/etc/timezone:ro
+    ports:
+      - 1813:1813
+    networks:
+      - mynet
+
+networks:
+  mynet:
+
