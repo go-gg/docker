@@ -1,0 +1,1 @@
+kubectl -n ytj-production create secret generic basic-auth --from-file=htpasswd

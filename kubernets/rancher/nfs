@@ -1,0 +1,9 @@
+exportfs -r
+showmount -e localhost
+
+
+
+#install
+storageClass.name nfs-data
+nfs.path		/mnt/nfs/logs
+nfs.server		172.16.39.137
