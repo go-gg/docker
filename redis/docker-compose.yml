@@ -1,6 +1,6 @@
 version: "3.1"
 services:
-  db:   
+  db:
     image: redis
     deploy:
       restart_policy:
@@ -10,7 +10,7 @@ services:
       - ./data:/redisData
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro
-    command: 
+    command:
       redis-server /etc/redis/redis.conf
     ports:
       - 6379:6379

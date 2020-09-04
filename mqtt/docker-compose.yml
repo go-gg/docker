@@ -12,7 +12,7 @@ services:
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro
     ports:
-      - 1813:1813
+      - 1883:1883
     networks:
       - mynet
 

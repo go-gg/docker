@@ -1,1 +1,1 @@
-docker stack deploy -c .\docker-compose.yml mqtt
+docker stack deploy -c ./docker-compose.yml mqtt
