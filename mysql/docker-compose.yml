@@ -1,6 +1,6 @@
 version: "3.1"
 services:
-  db:   
+  db:
     image: mysql
     deploy:
       restart_policy:
@@ -10,7 +10,7 @@ services:
       - ./data:/mysqlData
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro
-    command: 
+    command:
       --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: mYL5VRClXYGCX4Hf

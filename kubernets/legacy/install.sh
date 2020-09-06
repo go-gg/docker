@@ -17,11 +17,11 @@ kubectl delete secret baifm.cn-tls -n kube-system
 
 kubectl delete -f ./traefik-ui.yaml
 kubectl delete -f ./traefik-ds.yaml
-kubectl delete -f ./traefik-rbac.yaml 
+kubectl delete -f ./traefik-rbac.yaml
 
 kubectl delete -f ./traefik-deployment.yaml
 
-kubectl apply -f ./traefik-rbac.yaml 
+kubectl apply -f ./traefik-rbac.yaml
 kubectl apply -f ./traefik-ds.yaml
 kubectl apply -f ./traefik-ui.yaml
 
@@ -66,13 +66,11 @@ kubectl apply -f ./helm-rbac.yaml
 helm init --service-account tiller --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.14.2 --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
 helm init --service-account tiller --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.14.2 --tiller-tls-cert /etc/kubernetes/ssl/tiller001.pem --tiller-tls-key /etc/kubernetes/ssl/tiller001-key.pem --tls-ca-cert /etc/kubernetes/ssl/ca.pem --tiller-namespace kube-system --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
 
-
 #gitlab
 #https://docs.gitlab.com/ee/user/project/clusters/
 
 kubectl get secrets
 kubectl get secret default-token-4cljb -o jsonpath="{['data']['ca\.crt']}" | base64 --decode
-
 
 kubectl apply -f gitlab-admin-service-account.yaml
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep gitlab-admin | awk '{print $1}')

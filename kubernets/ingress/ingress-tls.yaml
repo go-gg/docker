@@ -1,20 +1,20 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: nsqadmin
+  name: ytj-unionpay-notify
   annotations:
-    kubernetes.io/ingress.class: "nginx"    
+    kubernetes.io/ingress.class: "nginx"
     cert-manager.io/issuer: "letsencrypt-prod"
 spec:
   tls:
-  - hosts:
-    - nsqadmin.ytj.msjiay.com
-    secretName: nsqadmin-tls
+    - hosts:
+        - unionpay-notify.ytj.msjiay.com
+      secretName: ytj-unionpay-notify-tls
   rules:
-  - host: nsqadmin.ytj.msjiay.com
-    http:
-      paths:
-      - path:
-        backend:
-          serviceName: nsqadmin
-          servicePort: 4171
+    - host: unionpay-notify.ytj.msjiay.com
+      http:
+        paths:
+          - path:
+            backend:
+              serviceName: ytj-unionpay-notify
+              servicePort: 80

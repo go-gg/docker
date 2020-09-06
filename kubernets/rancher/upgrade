@@ -1,0 +1,13 @@
+docker create --volumes-from infallible_lewin --name rancher-data rancher/rancher:stable
+
+docker run --volumes-from rancher-data -v $PWD:/backup busybox tar zcvf /backup/rancher-data-backup1.tar.gz /var/lib/rancher
+
+docker run -d --volumes-from rancher-data \
+--restart=unless-stopped \
+-p 80:80 -p 443:443 \
+-v /var/rancher/data:/var/lib/rancher \
+-v /var/rancher/auditlog:/var/log/auditlog \
+-e CATTLE_SYSTEM_CATALOG=bundled \
+-e AUDIT_LEVEL=3 \
+rancher/rancher:v2.4.8 \
+--acme-domain rancher.msjiay.com

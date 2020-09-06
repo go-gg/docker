@@ -1,8 +1,35 @@
-docker run -d --restart=unless-stopped \
--p 80:80 -p 443:443 \
--v /var/rancher/data:/var/lib/rancher \
--v /var/rancher/auditlog:/var/log/auditlog \
--e CATTLE_SYSTEM_CATALOG=bundled \
--e AUDIT_LEVEL=3 \
-rancher/rancher:stable \
---acme-domain rancher.msjiay.com
+mkdir -p /etc/docker
+cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+  "registry-mirrors": ["https://5twf62k1.mirror.aliyuncs.com"],
+  "exec-opts": ["native.cgroupdriver=systemd"]
+}
+EOF
+systemctl daemon-reload
+systemctl restart docker
+
+
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sudo sysctl --system
+
+lsmod | grep br_netfilter
+
+cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+exclude=kubelet kubeadm kubectl
+EOF
+
+# Set SELinux in permissive mode (effectively disabling it)
+sudo setenforce 0
+sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+
+

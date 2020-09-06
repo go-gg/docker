@@ -1,0 +1,1 @@
+/bin/sh -c '/nsqd --lookupd-tcp-address=nsqlookupd:4160 --data-path=/data --broadcast-address=$HOSTNAME.nsqd'

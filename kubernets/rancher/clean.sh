@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 KUBE_SVC='
@@ -9,14 +8,13 @@ kube-controller-manager
 kube-apiserver
 '
 
-for kube_svc in ${KUBE_SVC};
-do
+for kube_svc in ${KUBE_SVC}; do
   # 停止服务
-  if [[ `systemctl is-active ${kube_svc}` == 'active' ]]; then
+  if [[ $(systemctl is-active ${kube_svc}) == 'active' ]]; then
     systemctl stop ${kube_svc}
   fi
   # 禁止服务开机启动
-  if [[ `systemctl is-enabled ${kube_svc}` == 'enabled' ]]; then
+  if [[ $(systemctl is-enabled ${kube_svc}) == 'enabled' ]]; then
     systemctl disable ${kube_svc}
   fi
 done
@@ -31,9 +29,8 @@ docker rm -f $(docker ps -qa)
 docker volume rm $(docker volume ls -q)
 
 # 卸载mount目录
-for mount in $(mount | grep tmpfs | grep '/var/lib/kubelet' | awk '{ print $3 }') /var/lib/kubelet /var/lib/rancher;
-do
-  umount $mount;
+for mount in $(mount | grep tmpfs | grep '/var/lib/kubelet' | awk '{ print $3 }') /var/lib/kubelet /var/lib/rancher; do
+  umount $mount
 done
 
 # 备份目录
@@ -44,18 +41,18 @@ mv /opt/rke /opt/rke-bak-$(date +"%Y%m%d%H%M")
 
 # 删除残留路径
 rm -rf /etc/ceph \
-    /etc/cni \
-    /opt/cni \
-    /run/secrets/kubernetes.io \
-    /run/calico \
-    /run/flannel \
-    /var/lib/calico \
-    /var/lib/cni \
-    /var/lib/kubelet \
-    /var/log/containers \
-    /var/log/kube-audit \
-    /var/log/pods \
-    /var/run/calico
+  /etc/cni \
+  /opt/cni \
+  /run/secrets/kubernetes.io \
+  /run/calico \
+  /run/flannel \
+  /var/lib/calico \
+  /var/lib/cni \
+  /var/lib/kubelet \
+  /var/log/containers \
+  /var/log/kube-audit \
+  /var/log/pods \
+  /var/run/calico
 
 # 清理网络接口
 no_del_net_inter='
@@ -66,10 +63,9 @@ ens
 bond
 '
 
-network_interface=`ls /sys/class/net`
+network_interface=$(ls /sys/class/net)
 
-for net_inter in $network_interface;
-do
+for net_inter in $network_interface; do
   if ! echo "${no_del_net_inter}" | grep -qE ${net_inter:0:3}; then
     ip link delete $net_inter
   fi
@@ -89,15 +85,14 @@ port_list='
 10254
 '
 
-for port in $port_list;
-do
-  pid=`netstat -atlnup | grep $port | awk '{print $7}' | awk -F '/' '{print $1}' | grep -v - | sort -rnk2 | uniq`
+for port in $port_list; do
+  pid=$(netstat -atlnup | grep $port | awk '{print $7}' | awk -F '/' '{print $1}' | grep -v - | sort -rnk2 | uniq)
   if [[ -n $pid ]]; then
     kill -9 $pid
   fi
 done
 
-kube_pid=`ps -ef | grep -v grep | grep kube | awk '{print $2}'`
+kube_pid=$(ps -ef | grep -v grep | grep kube | awk '{print $2}')
 
 if [[ -n $kube_pid ]]; then
   kill -9 $kube_pid

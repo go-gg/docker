@@ -1,0 +1,3 @@
+./ossutil64  config -e oss-cn-hangzhou.aliyuncs.com  -i LTAI4Fe9TdTrDi73xourpTnA -k gbH97ho56FJtCs5rbp4iLiY7e7KuDK
+./ossutil64  --parallel=5  cp /var/opt/gitlab/backups/1599303095_2020_09_05_13.3.5_gitlab_backup.tar oss://ytj-app/backup/gitlab/1599303095_2020_09_05_13.3.5_gitlab_backup.tar
+

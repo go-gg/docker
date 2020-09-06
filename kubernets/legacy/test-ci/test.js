@@ -1,5 +1,5 @@
 //i am a test file
 //new122222
-setInterval(function(){
+setInterval(function () {
     console.log(new Date());
-},6000)
+}, 6000)

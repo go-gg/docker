@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    field.cattle.io/creatorId: user-lvwp6
+  labels:
+    workload.user.cattle.io/workloadselector: statefulSet-ytj-production-ytj-app
+  name: ytj-app
+  namespace: ytj-production
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: statefulSet-ytj-production-ytj-app
+  template:
+    metadata:
+      annotations:
+        field.cattle.io/ports: '[[{"containerPort":80,"dnsName":"ytj-app","hostPort":0,"kind":"ClusterIP","name":"80tcp02","protocol":"TCP","sourcePort":0}]]'
+      labels:
+        workload.user.cattle.io/workloadselector: statefulSet-ytj-production-ytj-app
+    spec:
+      imagePullSecrets:
+        - name: aliyuncs
+      restartPolicy: Always
+      containers:
+        - env:
+            - name: GO_OPT_APPLICATION_PORT
+              value: "80"
+          envFrom:
+            - configMapRef:
+                name: go-opt
+                optional: false
+          image: registry.cn-hangzhou.aliyuncs.com/ysny/ytj-app:latest
+          imagePullPolicy: Always
+          name: ytj-app
+          ports:
+            - containerPort: 80
+              name: 80tcp02
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /app/logs
+              name: ytj-logs
+              subPath: ytj-app
+      volumes:
+        - name: ytj-logs
+          persistentVolumeClaim:
+            claimName: ytj-logs
