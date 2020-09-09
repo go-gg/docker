@@ -1,0 +1,4 @@
+port 26379
+dir /data
+sentinel monitor master redis-master 6379 2
+sentinel auth-pass master 5BTB0EiSQtkFOau7
