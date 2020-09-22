@@ -1,0 +1,12 @@
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+
+setup.kibana:
+  host: "kibana:5601"
+  username: "elastic"
+  password: "35R0mbPQqxl2Q72a66w4"
+
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  username: "elastic"
+  password: "35R0mbPQqxl2Q72a66w4"

@@ -1,0 +1,46 @@
+{
+  "description": "Pipeline for dissecting Golang JSON logs",
+  "processors": [
+    {
+      "json": {
+        "field": "message",
+        "target_field": "log",
+        "ignore_failure": true
+      }
+    },
+    {
+      "date": {
+        "field": "log.time",
+        "target_field": "@timestamp",
+        "formats": [
+          "ISO8601"
+        ],
+        "timezone": "Asia/Shanghai",
+        "ignore_failure": true
+      }
+    },
+    {
+      "date_index_name": {
+        "field": "log.time",
+        "index_name_prefix": "{{log.namespace}}-{{log.app_name}}-{{log.logger_name}}-",
+        "date_rounding": "M"
+      }
+    },
+    {
+      "remove": {
+        "field": [
+          "log.time"
+        ],
+        "ignore_failure": true
+      }
+    }
+  ],
+  "on_failure": [
+    {
+      "set": {
+        "field": "error.message",
+        "value": "{{ _ingest.on_failure_message }}"
+      }
+    }
+  ]
+}

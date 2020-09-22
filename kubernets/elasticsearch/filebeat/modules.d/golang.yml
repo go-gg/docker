@@ -1,0 +1,4 @@
+- module: golang
+  log:
+    enabled: true
+    #var.paths:
