@@ -1,24 +1,24 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ytj-device
+  name: ytj-nonsense-ajkm
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    cert-manager.io/issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/auth-type: basic
-    nginx.ingress.kubernetes.io/auth-secret: device-test
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+#    nginx.ingress.kubernetes.io/auth-type: basic
+#    nginx.ingress.kubernetes.io/auth-secret: app-test
 #    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 #    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   tls:
     - hosts:
-        - device.ytj.msjiay.com
-      secretName: ytj-device-tls
+        - ajkm.nonsense.testing.ytj.msjiay.com
+      secretName: ytj-nonsense-ajkm
   rules:
-    - host: device.ytj.msjiay.com
+    - host: ajkm.nonsense.testing.ytj.msjiay.com
       http:
         paths:
-          - path:
+          - path: /
             backend:
-              serviceName: ytj-device
+              serviceName: ytj-app
               servicePort: 80

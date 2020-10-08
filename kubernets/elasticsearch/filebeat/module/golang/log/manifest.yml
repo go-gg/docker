@@ -4,7 +4,7 @@ var:
   - name: paths
     default:
       #      - /logs/*/*/*.log
-      - /logs/ytj-testing/*/*.log
+      - /logs/ytj-production/*/*.log
 
 ingest_pipeline: ingest/pipeline.json
 input: config/log.yml

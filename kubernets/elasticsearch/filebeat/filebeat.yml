@@ -4,9 +4,9 @@ filebeat.config.modules:
 setup.kibana:
   host: "kibana:5601"
   username: "elastic"
-  password: "35R0mbPQqxl2Q72a66w4"
+  password: "534s1AZQE9SRTLLdxdRs"
 
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
   username: "elastic"
-  password: "35R0mbPQqxl2Q72a66w4"
+  password: "534s1AZQE9SRTLLdxdRs"
