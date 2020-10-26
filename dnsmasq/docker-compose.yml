@@ -1,0 +1,22 @@
+version: '3.6'
+services:
+  dnsmasq:
+    image: jpillora/dnsmasq
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - ./dnsmasq.conf:/etc/dnsmasq.conf
+      - ../etc/localtime:/etc/localtime:ro
+      - ../etc/timezone:/etc/timezone:ro
+    environment:
+      HTTP_USER: admin
+      HTTP_PASS: admin
+    ports:
+      - 5380:8080
+      - 53:53/udp
+    networks:
+      - mynet
+
+networks:
+  mynet:

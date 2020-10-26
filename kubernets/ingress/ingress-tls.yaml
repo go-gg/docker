@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ytj-nonsense-ajkm
+  name: unionpay-notice
   annotations:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
@@ -12,13 +12,17 @@ metadata:
 spec:
   tls:
     - hosts:
-        - ajkm.nonsense.testing.ytj.msjiay.com
-      secretName: ytj-nonsense-ajkm
+        - unionpay-notice.msjiay.com
+      secretName: unionpay-notice
   rules:
-    - host: ajkm.nonsense.testing.ytj.msjiay.com
+    - host: unionpay-notice.msjiay.com
       http:
         paths:
           - path: /
             backend:
               serviceName: ytj-app
+              servicePort: 80
+          - path: /sock
+            backend:
+              serviceName: ytj-app-notify
               servicePort: 80
