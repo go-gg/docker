@@ -1,0 +1,24 @@
+version: '3.6'
+services:
+  rancher:
+    image: rancher/rancher:latest
+    privileged: true
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - ./data:/var/lib/rancher
+      - ./auditlog:/var/log/auditlog
+      - ../etc/localtime:/etc/localtime:ro
+      - ../etc/timezone:/etc/timezone:ro
+    environment:
+      CATTLE_SYSTEM_CATALOG: bundled
+      AUDIT_LEVEL: 3
+    ports:
+      - 2080:80
+      - 2443:443
+    networks:
+      - mynet
+
+networks:
+  mynet:

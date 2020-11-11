@@ -1,5 +1,9 @@
-filebeat.config.modules:
-  path: ${path.config}/modules.d/*.yml
+filebeat.modules:
+  - module: golang
+    log:
+      enabled: true
+      var.paths:
+        - /logs/ytj-production/*/*.log
 
 setup.kibana:
   host: "kibana:5601"
@@ -7,6 +11,6 @@ setup.kibana:
   password: "534s1AZQE9SRTLLdxdRs"
 
 output.elasticsearch:
-  hosts: ["elasticsearch:9200"]
+  hosts: [ "elasticsearch:9200" ]
   username: "elastic"
   password: "534s1AZQE9SRTLLdxdRs"

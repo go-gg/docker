@@ -1,0 +1,13 @@
+sysctl -w vm.max_map_count=262144
+
+bin/elasticsearch-certutil ca
+bin/elasticsearch-certutil cert --ca elastic-stack-ca.p12
+bin/elasticsearch-setup-passwords auto
+
+PASSWORD apm_system = dvKTO884BysA7byHF5Ej
+PASSWORD kibana_system = oZhpw8NdafnTanKAZacv
+PASSWORD kibana = oZhpw8NdafnTanKAZacv
+PASSWORD logstash_system = jlNguALkO4duFSWEIePS
+PASSWORD beats_system = QlAzu6nnOg9WawakGQzF
+PASSWORD remote_monitoring_user = 2BShROKRpQfNm4D0hCu7
+PASSWORD elastic = SVUvfXN6U8LYkBqhK4S2

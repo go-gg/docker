@@ -3,8 +3,7 @@ module_version: 1.0
 var:
   - name: paths
     default:
-      #      - /logs/*/*/*.log
-      - /logs/ytj-production/*/*.log
+      - /logs/*.log
 
 ingest_pipeline: ingest/pipeline.json
 input: config/log.yml
