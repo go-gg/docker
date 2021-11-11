@@ -1,0 +1,15 @@
+rancher:
+  image: rancher/rancher:v2.5.11
+  restart: always
+  privileged: true
+  environment:
+    CATTLE_SYSTEM_CATALOG: bundled
+    AUDIT_LEVEL: 3
+  ports:
+    - '80:80'
+    - '443:443'
+  volumes:
+    - '/var/rancher/data:/var/lib/rancher'
+    - '/var/rancher/auditlog:/var/log/auditlog'
+  command:
+    --acme-domain rancher.msjiay.com

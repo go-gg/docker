@@ -5,5 +5,5 @@ docker run -d --restart=unless-stopped \
 -e CATTLE_SYSTEM_CATALOG=bundled \
 -e AUDIT_LEVEL=3 \
 --privileged \
-rancher/rancher:latest \
+rancher/rancher:v2.5.11 \
 --acme-domain k8s.msjiay.com
