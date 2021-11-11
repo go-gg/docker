@@ -1,0 +1,45 @@
+version: '3.6'
+services:
+  emqx:
+    image: emqx/emqx:4.3.3
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - ./data:/opt/emqx/data
+      - ./log:/opt/emqx/log
+      - ./etc/plugins/emqx_auth_mnesia.conf:/opt/emqx/etc/plugins/emqx_auth_mnesia.conf
+      - ./etc/acl.conf:/opt/emqx/etc/acl.conf
+      - ../etc/localtime:/etc/localtime:ro
+      - ../etc/timezone:/etc/timezone:ro
+    environment:
+      EMQX_NAME: ytj
+      EMQX_HOST: 127.0.0.1
+      EMQX_ALLOW_ANONYMOUS: "false"
+      EMQX_ACL_NOMATCH: "deny"
+      EMQX_LOADED_PLUGINS: emqx_management,emqx_recon,emqx_retainer,emqx_dashboard,emqx_rule_engine,emqx_auth_mnesia
+      EMQX_LOADED_MODULES: emqx_mod_acl_internal,emqx_mod_presence
+      EMQX_LOG__LEVEL: info
+      EMQX_LOG__INFO__FILE: info.log
+      EMQX_LOG__ERROR__FILE: error.log
+    ports:
+      - 1883:1883
+      - 8081:8081
+      - 18083:18083
+    networks:
+      - mynet
+
+networks:
+  mynet:
+
+#  /opt/emqx/data $ cat loaded_modules
+#  {emqx_mod_acl_internal, true}.
+#  {emqx_mod_presence, true}.
+#  /opt/emqx/data $ cat loaded_plugins
+#  {emqx_management, true}.
+#  {emqx_dashboard, true}.
+#  {emqx_recon, true}.
+#  {emqx_retainer, true}.
+#  {emqx_rule_engine, true}.
+#  {emqx_bridge_mqtt, false}.
+#  /opt/emqx/data $
