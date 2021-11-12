@@ -36,7 +36,7 @@ services:
       - ../etc/timezone:/etc/timezone:ro
     environment:
       JAVA_OPT_EXT: "-Duser.home=/opt -server -Xms256m -Xmx256m -Xmn256m"
-    command: ["/bin/bash","mqbroker","-c","/etc/rocketmq/broker.conf","-n","rmqnamesrv:9876","autoCreateTopicEnable=true"]
+    command: [ "/bin/bash","mqbroker","-c","/etc/rocketmq/broker.conf","-n","rmqnamesrv:9876","autoCreateTopicEnable=true" ]
     depends_on:
       - rmqnamesrv
     networks:

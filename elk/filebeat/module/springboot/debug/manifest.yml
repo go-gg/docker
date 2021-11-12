@@ -4,8 +4,8 @@ var:
   - name: paths
     default:
       - /app/logs/*/*/*.log
-    os.darwin: []
-    os.windows: []
+    os.darwin: [ ]
+    os.windows: [ ]
 
 ingest_pipeline: ingest/default.json
 input: config/debug.yml

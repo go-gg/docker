@@ -6,7 +6,7 @@ spec:
   containers:
     - name: test-container
       image: alpine
-      command: [ "sh", "-c"]
+      command: [ "sh", "-c" ]
       args:
         - while true; do
           echo -en '\n';
