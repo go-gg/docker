@@ -1,0 +1,18 @@
+version: "3.1"
+services:
+  db:
+    image: nginx
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+      - ../etc/localtime:/etc/localtime:ro
+      - ../etc/timezone:/etc/timezone:ro
+    ports:
+      - 8888:8888
+    networks:
+      - mynet
+
+networks:
+  mynet:

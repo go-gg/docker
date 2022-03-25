@@ -1,28 +1,21 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: unionpay-notice
+  name: clm-app
   annotations:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-#    nginx.ingress.kubernetes.io/auth-type: basic
-#    nginx.ingress.kubernetes.io/auth-secret: app-test
-#    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-#    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/upstream-hash-by: "$remote_addr"
 spec:
   tls:
     - hosts:
-        - unionpay-notice.msjiay.com
-      secretName: unionpay-notice
+        - app.clm.msjiay.com
+      secretName: clm-app-tls
   rules:
-    - host: unionpay-notice.msjiay.com
+    - host: app.clm.msjiay.com
       http:
         paths:
           - path: /
             backend:
-              serviceName: ytj-app
-              servicePort: 80
-          - path: /sock
-            backend:
-              serviceName: ytj-app-notify
+              serviceName: clm-app
               servicePort: 80

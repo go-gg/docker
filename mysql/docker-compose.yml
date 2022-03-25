@@ -8,10 +8,14 @@ services:
     volumes:
       - ./my.cnf:/etc/mysql/my.cnf
       - ./data:/mysqlData
+      - ./mysql-files:/var/lib/mysql-files
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro
-    command:
-      --default-authentication-plugin=mysql_native_password
+    command: >
+      bash -c "
+      chmod 644 /etc/mysql/my.cnf
+      && /entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password
+      "
     environment:
       MYSQL_ROOT_PASSWORD: mYL5VRClXYGCX4Hf
     ports:
