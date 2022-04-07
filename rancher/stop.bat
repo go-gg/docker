@@ -1,1 +1,1 @@
-docker stack rm jaeger
+docker stack rm rancher

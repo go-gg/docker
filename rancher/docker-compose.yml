@@ -15,8 +15,8 @@ services:
       CATTLE_SYSTEM_CATALOG: bundled
       AUDIT_LEVEL: 3
     ports:
-      - 2080:80
-      - 2443:443
+      - 10080:80
+      - 10443:443
     networks:
       - mynet
 

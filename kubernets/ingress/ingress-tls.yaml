@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: clm-app
+  name: ytj-nonsense-fy
   annotations:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
@@ -9,13 +9,13 @@ metadata:
 spec:
   tls:
     - hosts:
-        - app.clm.msjiay.com
-      secretName: clm-app-tls
+        - fy.nonsense.ytj.msjiay.com
+      secretName: ytj-nonsense-fy-tls
   rules:
-    - host: app.clm.msjiay.com
+    - host: fy.nonsense.ytj.msjiay.com
       http:
         paths:
           - path: /
             backend:
-              serviceName: clm-app
+              serviceName: ytj-app
               servicePort: 80

@@ -1,1 +1,1 @@
-docker stack deploy -c ./docker-compose.yml jaeger
+docker stack deploy -c ./docker-compose.yml rancher
