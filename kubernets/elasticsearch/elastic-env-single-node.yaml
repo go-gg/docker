@@ -1,0 +1,49 @@
+apiVersion: v1
+data:
+  ELASTIC_PASSWORD: JTqkNBSlKCylQBTOiWNw
+  ES_JAVA_OPTS: -Xms1024m -Xmx1024m
+  discovery.type: single-node
+  network.host: 0.0.0.0
+  xpack.monitoring.collection.enabled: "true"
+  xpack.security.enabled: "true"
+  xpack.security.transport.ssl.enabled: "true"
+  xpack.security.transport.ssl.keystore.path: certs/elastic-certificates.p12
+  xpack.security.transport.ssl.truststore.path: certs/elastic-certificates.p12
+  xpack.security.transport.ssl.verification_mode: certificate
+kind: ConfigMap
+metadata:
+  annotations:
+    field.cattle.io/creatorId: user-6gpbf
+  creationTimestamp: "2022-04-08T12:59:17Z"
+  labels:
+    cattle.io/creator: norman
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        .: {}
+        f:ELASTIC_PASSWORD: {}
+        f:ES_JAVA_OPTS: {}
+        f:discovery.type: {}
+        f:network.host: {}
+        f:xpack.monitoring.collection.enabled: {}
+        f:xpack.security.enabled: {}
+        f:xpack.security.transport.ssl.enabled: {}
+        f:xpack.security.transport.ssl.keystore.path: {}
+        f:xpack.security.transport.ssl.truststore.path: {}
+        f:xpack.security.transport.ssl.verification_mode: {}
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:field.cattle.io/creatorId: {}
+        f:labels:
+          .: {}
+          f:cattle.io/creator: {}
+    manager: rancher
+    operation: Update
+    time: "2022-04-08T12:59:17Z"
+  name: elastic-env
+  namespace: ytj-testing
+  resourceVersion: "215157"
+  uid: e94177e1-a17f-4191-8541-43f8e50b9f0f

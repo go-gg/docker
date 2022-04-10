@@ -1,21 +1,23 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ytj-nonsense-fy
+  name: jaeger
   annotations:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/upstream-hash-by: "$remote_addr"
+    nginx.ingress.kubernetes.io/auth-realm: Authentication Required
+    nginx.ingress.kubernetes.io/auth-secret: ingress-basic-auth
+    nginx.ingress.kubernetes.io/auth-type: basic
 spec:
   tls:
     - hosts:
-        - fy.nonsense.ytj.msjiay.com
-      secretName: ytj-nonsense-fy-tls
+        - jaeger.ytj.msjiay.com
+      secretName: jaeger-tls
   rules:
-    - host: fy.nonsense.ytj.msjiay.com
+    - host: jaeger.ytj.msjiay.com
       http:
         paths:
           - path: /
             backend:
-              serviceName: ytj-app
-              servicePort: 80
+              serviceName: jaeger-query
+              servicePort: 16686

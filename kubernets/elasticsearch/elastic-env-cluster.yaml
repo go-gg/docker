@@ -1,0 +1,54 @@
+apiVersion: v1
+data:
+  ELASTIC_PASSWORD: sxnywu1b6nxzetul
+  ES_JAVA_OPTS: -Xms2048m -Xmx2048m
+  cluster.initial_master_nodes: elasticsearch-0,elasticsearch-1,elasticsearch-2
+  discovery.seed_hosts: elasticsearch-0.elasticsearch,elasticsearch-1.elasticsearch,elasticsearch-2.elasticsearch
+  network.host: 0.0.0.0
+  xpack.monitoring.collection.enabled: "true"
+  xpack.security.enabled: "true"
+  xpack.security.transport.ssl.enabled: "true"
+  xpack.security.transport.ssl.keystore.path: certs/elastic-certificates.p12
+  xpack.security.transport.ssl.truststore.path: certs/elastic-certificates.p12
+  xpack.security.transport.ssl.verification_mode: certificate
+kind: ConfigMap
+metadata:
+  annotations:
+    field.cattle.io/creatorId: user-r986f
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"ELASTIC_PASSWORD":"sxnywu1b6nxzetul","ES_JAVA_OPTS":"-Xms2048m -Xmx2048m","cluster.initial_master_nodes":"elasticsearch-0,elasticsearch-1,elasticsearch-2","discovery.seed_hosts":"elasticsearch-0.elasticsearch,elasticsearch-1.elasticsearch,elasticsearch-2.elasticsearch","network.host":"0.0.0.0","xpack.monitoring.collection.enabled":"true","xpack.security.enabled":"true","xpack.security.transport.ssl.enabled":"true","xpack.security.transport.ssl.keystore.path":"certs/elastic-certificates.p12","xpack.security.transport.ssl.truststore.path":"certs/elastic-certificates.p12","xpack.security.transport.ssl.verification_mode":"certificate"},"kind":"ConfigMap","metadata":{"annotations":{"field.cattle.io/creatorId":"user-r986f"},"creationTimestamp":null,"labels":{"cattle.io/creator":"norman"},"managedFields":[{"apiVersion":"v1","fieldsType":"FieldsV1","fieldsV1":{"f:data":{".":{},"f:ELASTIC_PASSWORD":{},"f:ES_JAVA_OPTS":{},"f:cluster.initial_master_nodes":{},"f:discovery.seed_hosts":{},"f:network.host":{},"f:xpack.monitoring.collection.enabled":{},"f:xpack.security.enabled":{},"f:xpack.security.transport.ssl.enabled":{},"f:xpack.security.transport.ssl.keystore.path":{},"f:xpack.security.transport.ssl.truststore.path":{},"f:xpack.security.transport.ssl.verification_mode":{}},"f:metadata":{"f:annotations":{".":{},"f:field.cattle.io/creatorId":{},"f:kubectl.kubernetes.io/last-applied-configuration":{}},"f:labels":{".":{},"f:cattle.io/creator":{}}}},"manager":"kubectl-client-side-apply","operation":"Update","time":"2021-11-09T17:59:39Z"}],"name":"elastic-env","namespace":"ytj-production"}}
+  creationTimestamp: "2022-04-07T21:49:08Z"
+  labels:
+    cattle.io/creator: norman
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        .: {}
+        f:ELASTIC_PASSWORD: {}
+        f:ES_JAVA_OPTS: {}
+        f:cluster.initial_master_nodes: {}
+        f:discovery.seed_hosts: {}
+        f:network.host: {}
+        f:xpack.monitoring.collection.enabled: {}
+        f:xpack.security.enabled: {}
+        f:xpack.security.transport.ssl.enabled: {}
+        f:xpack.security.transport.ssl.keystore.path: {}
+        f:xpack.security.transport.ssl.truststore.path: {}
+        f:xpack.security.transport.ssl.verification_mode: {}
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:field.cattle.io/creatorId: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:labels:
+          .: {}
+          f:cattle.io/creator: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2021-11-09T17:59:39Z"
+  name: elastic-env
+  namespace: ytj-production
+  resourceVersion: "4973"
+  uid: ca4be748-ca82-45dd-be2b-92cdf2c75f50
