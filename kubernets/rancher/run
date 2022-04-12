@@ -2,8 +2,9 @@ docker run -d --restart=unless-stopped \
 -p 80:80 -p 443:443 \
 -v /var/rancher/data:/var/lib/rancher \
 -v /var/rancher/auditlog:/var/log/auditlog \
+-v /var/rancher/backup:/opt/backup \
 -e CATTLE_SYSTEM_CATALOG=bundled \
 -e AUDIT_LEVEL=3 \
 --privileged \
-rancher/rancher:v2.5.11 \
---acme-domain k8s.msjiay.com
+rancher/rancher:v2.5.12-patch1 \
+--acme-domain rancher.msjiay.com

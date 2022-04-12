@@ -1,5 +1,5 @@
 rancher:
-  image: rancher/rancher:v2.5.11
+  image: rancher/rancher:v2.5.12-patch1
   restart: always
   privileged: true
   environment:
@@ -11,5 +11,6 @@ rancher:
   volumes:
     - '/var/rancher/data:/var/lib/rancher'
     - '/var/rancher/auditlog:/var/log/auditlog'
+    - '/var/rancher/backup:/opt/backup'
   command:
     --acme-domain rancher.msjiay.com
