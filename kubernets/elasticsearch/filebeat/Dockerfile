@@ -1,4 +1,4 @@
-FROM elastic/filebeat:7.17.2
+FROM elastic/filebeat:7.17.8
 
 USER root
 RUN mkdir -p /usr/share/filebeat/module/golang/log/config

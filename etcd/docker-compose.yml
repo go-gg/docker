@@ -19,10 +19,10 @@ services:
       ETCD_INITIAL_CLUSTER: etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380
       ETCD_INITIAL_CLUSTER_STATE: new
     ports:
-      - 6079:2379
-      - 6080:2380
+      - "4079:2379"
+      - "4080:2380"
     networks:
-      - mynet
+      - network1
 
   etcd2:
     image: bitnami/etcd
@@ -42,10 +42,10 @@ services:
       ETCD_INITIAL_CLUSTER: etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380
       ETCD_INITIAL_CLUSTER_STATE: new
     ports:
-      - 6179:2379
-      - 6180:2380
+      - "4179:2379"
+      - "4180:2380"
     networks:
-      - mynet
+      - network1
 
   etcd3:
     image: bitnami/etcd
@@ -65,10 +65,12 @@ services:
       ETCD_INITIAL_CLUSTER: etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380
       ETCD_INITIAL_CLUSTER_STATE: new
     ports:
-      - 6279:2379
-      - 6280:2380
+      - "4279:2379"
+      - "4280:2380"
     networks:
-      - mynet
+      - network1
 
 networks:
-  mynet:
+  network1:
+    name: mynet
+    external: true

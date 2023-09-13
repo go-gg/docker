@@ -3,7 +3,7 @@ filebeat.modules:
     log:
       enabled: true
       var.paths:
-        - /logs/ytj-production/*/*.log
+        - /logs/*/*/*.log
 
 setup.kibana:
   host: "kibana:5601"

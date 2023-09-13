@@ -1,23 +1,24 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ytj-active-test
+  name: openapi-order-tjmetroapp
   annotations:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   tls:
     - hosts:
-        - momo.eioos.com
-      secretName: ytj-active-test-tls
+        - openapi.mall.tjmetroapp.com
+      secretName: openapi-tjmetroapp-tls
   rules:
-    - host: momo.eioos.com
+    - host: openapi.mall.tjmetroapp.com
       http:
         paths:
           - pathType: Prefix
-            path: /
+            path: /trade/v1/order(/|$)(.*)
             backend:
               service:
-                name: ytj-active-test
+                name: openapi-order
                 port:
                   number: 80

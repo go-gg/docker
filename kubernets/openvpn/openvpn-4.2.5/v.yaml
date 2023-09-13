@@ -9,7 +9,7 @@ openvpn:
   serverConf: |
     client-to-client
 service:
-  type: NodePort #ClusterIP
+  type: NodePort
 ipForwardInitContainer: "true"
 nodeSelector:
   kubernetes.io/hostname: node-01

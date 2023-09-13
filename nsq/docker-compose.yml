@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 services:
   nsqlookupd:
     image: nsqio/nsq
@@ -10,10 +10,10 @@ services:
       - ../etc/timezone:/etc/timezone:ro
     command: /nsqlookupd
     ports:
-      - 4160:4160
-      - 4161:4161
+      - "4160:4160"
+      - "4161:4161"
     networks:
-      - mynet
+      - network1
 
   nsqd:
     image: nsqio/nsq
@@ -28,10 +28,10 @@ services:
     depends_on:
       - nsqlookupd
     ports:
-      - 4150:4150
-      - 4151:4151
+      - "4150:4150"
+      - "4151:4151"
     networks:
-      - mynet
+      - network1
 
   nsqadmin:
     image: nsqio/nsq
@@ -45,9 +45,11 @@ services:
     depends_on:
       - nsqlookupd
     ports:
-      - 4171:4171
+      - "4171:4171"
     networks:
-      - mynet
+      - network1
 
 networks:
-  mynet:
+  network1:
+    name: mynet
+    external: true

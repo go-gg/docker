@@ -6,5 +6,20 @@ docker run -d --restart=unless-stopped \
 -e CATTLE_SYSTEM_CATALOG=bundled \
 -e AUDIT_LEVEL=3 \
 --privileged \
-rancher/rancher:v2.5.12-patch1 \
---acme-domain rancher.msjiay.com
+rancher/rancher:latest \
+--acme-domain k8s.mall.tjgdznzf.com
+
+docker run -d --restart=unless-stopped \
+-p 1080:80 -p 1443:443 \
+-v /etc/letsencrypt/live/rancher.eioos.com/fullchain.pem:/etc/rancher/ssl/cert.pem \
+-v /etc/letsencrypt/live/rancher.eioos.com/privkey.pem:/etc/rancher/ssl/key.pem \
+-v /var/rancher/data:/var/lib/rancher \
+-v /var/rancher/auditlog:/var/log/auditlog \
+-v /var/rancher/backup:/opt/backup \
+-e CATTLE_SYSTEM_CATALOG=bundled \
+-e AUDIT_LEVEL=3 \
+--privileged \
+rancher/rancher:v2.6.9 \
+--no-cacerts
+
+docker logs  c89c32c4910bd331d40b31e1edc0fbbf311706cd9219bd83a04accf93bba650f  2>&1 | grep "Bootstrap Password:"

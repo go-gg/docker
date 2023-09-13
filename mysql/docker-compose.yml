@@ -1,6 +1,6 @@
-version: "3.1"
+version: "3.5"
 services:
-  db:
+  mysql:
     image: mysql
     deploy:
       restart_policy:
@@ -11,16 +11,15 @@ services:
       - ./mysql-files:/var/lib/mysql-files
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro
-    command: >
-      bash -c "
-      chmod 644 /etc/mysql/my.cnf
-      && /entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password
-      "
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: mYL5VRClXYGCX4Hf
     ports:
-      - 3306:3306
+      - "3306:3306"
     networks:
-      - mynet
+      - network1
+
 networks:
-  mynet:
+  network1:
+    name: mynet
+    external: true

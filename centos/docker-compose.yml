@@ -1,19 +1,14 @@
 version: "3.5"
 services:
-  redis:
-    image: redis
+  service:
+    image: centos:7
+    tty: true
     deploy:
       restart_policy:
         condition: on-failure
     volumes:
-      - ./redis.conf:/etc/redis/redis.conf
-      - ./data:/data
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro
-    command:
-      redis-server /etc/redis/redis.conf
-    ports:
-      - "6379:6379"
     networks:
       - network1
 
