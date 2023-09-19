@@ -1,18 +1,17 @@
 version: "3.5"
 services:
   mysql:
-    image: mysql
+    image: mysql:8.0
     deploy:
       restart_policy:
         condition: on-failure
     volumes:
-      - ./my.cnf:/etc/mysql/my.cnf
-      - ./data:/mysqlData
-      - ./mysql-files:/var/lib/mysql-files
+      - ./data:/var/lib/mysql
       - ../etc/localtime:/etc/localtime:ro
       - ../etc/timezone:/etc/timezone:ro
     command: --default-authentication-plugin=mysql_native_password
     environment:
+      MYSQL_ROOT_HOST: "%"
       MYSQL_ROOT_PASSWORD: mYL5VRClXYGCX4Hf
     ports:
       - "3306:3306"
