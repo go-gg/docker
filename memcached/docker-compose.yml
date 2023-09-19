@@ -1,0 +1,19 @@
+version: "3.5"
+services:
+  memcached:
+    image: memcached
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - ../etc/localtime:/etc/localtime:ro
+      - ../etc/timezone:/etc/timezone:ro
+    ports:
+      - "11211:11211"
+    networks:
+      - network1
+
+networks:
+  network1:
+    name: mynet
+    external: true
