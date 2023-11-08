@@ -1,4 +1,4 @@
-SET tag=registry.cn-hangzhou.aliyuncs.com/eioos/filebeat:7.17.8
+SET tag=registry.cn-chengdu.aliyuncs.com/st-common/filebeat:8.11.0
 docker build -t %tag% .
 docker push %tag%
 

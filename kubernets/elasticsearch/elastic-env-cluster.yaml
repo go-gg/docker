@@ -1,16 +1,16 @@
 apiVersion: v1
 data:
-  ELASTIC_PASSWORD: sxnywu1b6nxzetul
-  ES_JAVA_OPTS: -Xms2048m -Xmx2048m
   cluster.initial_master_nodes: elasticsearch-0,elasticsearch-1,elasticsearch-2
   discovery.seed_hosts: elasticsearch-0.elasticsearch,elasticsearch-1.elasticsearch,elasticsearch-2.elasticsearch
+  ELASTIC_PASSWORD: sxnywu1b6nxzetul
+  ES_JAVA_OPTS: -Xms2048m -Xmx2048m
   network.host: 0.0.0.0
   xpack.monitoring.collection.enabled: "true"
   xpack.security.enabled: "true"
   xpack.security.transport.ssl.enabled: "true"
+  xpack.security.transport.ssl.verification_mode: certificate
   xpack.security.transport.ssl.keystore.path: certs/elastic-certificates.p12
   xpack.security.transport.ssl.truststore.path: certs/elastic-certificates.p12
-  xpack.security.transport.ssl.verification_mode: certificate
 kind: ConfigMap
 metadata:
   annotations:
